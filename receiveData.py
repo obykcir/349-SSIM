@@ -2,11 +2,21 @@
 import serial
 
 try:
-  arduino = serial.Serial(timeoout = 1, baudrate = 9600)
+  arduino = serial.Serial(timeout = 1, baudrate = 9600)
 except:
   print('Check port')
   
 rawData = []
+
+def clean(L):
+  newl = []
+  
+  for i in range(len(L)):
+      temp = L[i][2:]
+      newl.append(temp[:-5])
+  return newl
+
+cleanData = clean(rawData)
 
 #write to file function
 def write(L):
@@ -21,5 +31,5 @@ def write(L):
 while True:
   rawData.append(str(arduino.readline()))
 
-#write(rawData)  
+write(cleanData)  
 
